@@ -7,24 +7,25 @@
         <title>Weather App</title>
     </head>
     <body>
-        <div id='main-container'>
-            <div id='search-container'>
-                <img id='search-icon' src="images/search-icon.png">
-                <input id='searchbox' type='text' placeholder="Search a city">
+        <div id='search-container'>
+            <img id='search-icon' src="images/search-icon.png">
+            <input id='searchbox' type='text' placeholder="Search a city">
+        </div>
+        <div id='weather-container'>
+            <div id='top-half'>
+                <p id='summary'>Overcast</p>
+                <p id='location'>HAZLET, NEW JERSEY</p>
             </div>
-            <div id='location-container'>
-                <p id='location'></p><img id='location-flag'>
-            </div>
-            <div id='weather-container-1'>
-                <p id='temp'></p><img id='weather-icon'>
-            </div>
-            <div id='weather-container-2'>
-                <div id='line-1'></div>
-                <div id='line-2'></div>
-            </div>
-            <div id='time-and-metric-container'>
-                <div id='toggle'></div>
-                <div id='time'></div>
+            <div id='bottom-half'>
+                <div id='bottom-left'>
+                    <p id='temp'>72</p><p id='temp-metric'>°F</p>
+                </div>
+                <div id='bottom-middle'></div>
+                <div id='bottom-right'>
+                    <p id='feels-like'>Feels Like: 76°F</p>
+                    <p id='wind'>Wind: 7 MPH</p>
+                    <p id='humidity'>Humidity: 73%</p>
+                </div>
             </div>
         </div>
         <script src="script.js" type="text/javascript"></script>
