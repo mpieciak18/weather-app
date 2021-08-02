@@ -5,7 +5,7 @@ const fetchWeather = async function() {
     // Set default parameters
     let lat = '';
     let lon = '';
-    let exclusion = 'minutely,hourly,daily,alerts';
+    let exclusion = 'minutely,daily,alerts';
     let units = 'imperial';
     try {
         const coords = await fetchCoords();
@@ -14,7 +14,9 @@ const fetchWeather = async function() {
         const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclusion}&units=${units}&appid=${appId}`;
         const todayResponse = await fetch(url, {mode: 'cors'})
         const todayJson = await todayResponse.json();
+        console.log(todayJson);
         const todayWeather = new todayWeatherConst(todayJson.current);
+        const hourlyWeather = null;
         console.log(todayWeather);
     } catch {
         console.log('error!');
@@ -33,7 +35,7 @@ const fetchCoords = async function() {
         console.log('error!');
     };
 }
-// Creates today's weather forecast object with only necessary attributes
+// Constructs today's weather forecast object with only necessary attributes
 const todayWeatherConst = function(object) {
     // Summarical attributes
     this.weather_summ = object.weather[0].main;
@@ -53,5 +55,9 @@ const todayWeatherConst = function(object) {
     this.wind_speed = object.wind_speed;
     this.wind_deg = object.wind_deg;
 };
+// Constructs hourly weather forecast object with only necessary attributes
+const hourlyWeatherConst = function(object) {
+
+}
 
 fetchWeather();
