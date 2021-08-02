@@ -5,19 +5,18 @@ const fetchWeather = async function() {
     // Set default parameters
     let lat = '';
     let lon = '';
-    let exclusion = 'minutely,daily,alerts';
+    let exclusion = 'minutely,hourly,daily,alerts';
     let units = 'imperial';
     try {
-        const coords = await fetchCoords();
-        lat = coords.lat;
-        lon = coords.lon;
+        const prelimWeatherData = await fetchCoords();
+        console.log(prelimWeatherData);
+        lat = prelimWeatherData.lat;
+        lon = prelimWeatherData.lon;
         const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclusion}&units=${units}&appid=${appId}`;
         const todayResponse = await fetch(url, {mode: 'cors'})
         const todayJson = await todayResponse.json();
-        console.log(todayJson);
         const todayWeather = new todayWeatherConst(todayJson.current);
-        const hourlyWeather = null;
-        console.log(todayWeather);
+        renderWeather(todayWeather, prelimWeatherData);
     } catch {
         console.log('error!');
     };
@@ -30,7 +29,14 @@ const fetchCoords = async function() {
         const url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=${appId}`;
         const response = await fetch(url, {mode: 'cors'})
         const responseJson = await response.json();
-        return responseJson.coord
+        const prelimWeatherData = {
+            lat: responseJson.coord.lat,
+            lon: responseJson.coord.lon,
+            city: responseJson.name,
+            country: responseJson.sys.country
+        };
+        console.log(prelimWeatherData);
+        return prelimWeatherData
     } catch {
         console.log('error!');
     };
@@ -38,9 +44,9 @@ const fetchCoords = async function() {
 // Constructs today's weather forecast object with only necessary attributes
 const todayWeatherConst = function(object) {
     // Summarical attributes
-    this.weather_summ = object.weather[0].main;
-    this.weather_descrip = object.weather[0].description;
-    this.weather_icon = object.weather[0].icon;
+    this.summary = object.weather[0].main;
+    this.description = object.weather[0].description;
+    this.icon = object.weather[0].icon;
     // All other attributes
     this.sunrise = object.sunrise;
     this.sunset = object.sunset;
@@ -55,9 +61,26 @@ const todayWeatherConst = function(object) {
     this.wind_speed = object.wind_speed;
     this.wind_deg = object.wind_deg;
 };
-// Constructs hourly weather forecast object with only necessary attributes
-const hourlyWeatherConst = function(object) {
 
-}
+// Renders weather attributes from object to DOM
+const renderWeather = function(weather, prelimWeather) {
+    const summary = document.getElementById('summary');
+    const location = document.getElementById('location');
+    const lat = document.getElementById('lat');
+    const lon = document.getElementById('lon');
+    const temp = document.getElementById('temp');
+    const feelsLike = document.getElementById('feels-like');
+    const wind = document.getElementById('wind');
+    const humidity = document.getElementById('humidity');
+
+    summary.innerText = weather.summary;
+    location.innerText = `${prelimWeather.city.toUpperCase()}, ${prelimWeather.country.toUpperCase()}`;
+    lat.innerText = `lat: ${prelimWeather.lat}`;
+    lon.innerText = `lon: ${prelimWeather.lon}`;
+    temp.innerText = Math.round(weather.temp);
+    feelsLike.innerText = `Feels Like: ${Math.round(weather.feels_like)}°F`;
+    wind.innerText = `Wind: ${Math.round(weather.wind_speed)} MPH`;
+    humidity.innerText = `Humidity: ${weather.humidity}%`;
+};
 
 fetchWeather();

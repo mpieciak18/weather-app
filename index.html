@@ -7,24 +7,28 @@
         <title>Weather App</title>
     </head>
     <body>
-        <div id='search-container'>
+        <form id='search-container'>
             <img id='search-icon' src="images/search-icon.png">
-            <input id='searchbox' type='text' placeholder="Search a city">
-        </div>
+            <input id='searchbox' type='text' placeholder="Search a city" display='none'>
+        </form>
         <div id='weather-container'>
             <div id='top-half'>
-                <p id='summary'>Overcast</p>
-                <p id='location'>HAZLET, NEW JERSEY</p>
+                <p id='summary'></p>
+                <p id='location'></p>
+                <div id='coords'>
+                    <p id='lat'></p>
+                    <p id='lon'></p>
+                </div>
             </div>
             <div id='bottom-half'>
                 <div id='bottom-left'>
-                    <p id='temp'>72</p><p id='temp-metric'>°F</p>
+                    <p id='temp'></p><p id='temp-metric'>°F</p>
                 </div>
                 <div id='bottom-middle'></div>
                 <div id='bottom-right'>
-                    <p id='feels-like'>Feels Like: 76°F</p>
-                    <p id='wind'>Wind: 7 MPH</p>
-                    <p id='humidity'>Humidity: 73%</p>
+                    <p id='feels-like'></p>
+                    <p id='wind'></p>
+                    <p id='humidity'></p>
                 </div>
             </div>
         </div>
