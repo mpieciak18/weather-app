@@ -1,15 +1,15 @@
 const appId = '7c6798fe35f78605f76d08c63b03e3c6';
 
 // Async function that fetches current weather from OpenWeather's API
-const fetchWeather = async function() {
+const fetchWeather = async function(keyword) {
     // Set default parameters
+    const location = keyword;
     let lat = '';
     let lon = '';
-    let exclusion = 'minutely,hourly,daily,alerts';
-    let units = 'imperial';
+    const exclusion = 'minutely,hourly,daily,alerts';
+    const units = 'imperial';
     try {
-        const prelimWeatherData = await fetchCoords();
-        console.log(prelimWeatherData);
+        const prelimWeatherData = await fetchCoords(location);
         lat = prelimWeatherData.lat;
         lon = prelimWeatherData.lon;
         const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=${exclusion}&units=${units}&appid=${appId}`;
@@ -22,11 +22,11 @@ const fetchWeather = async function() {
     };
 };
 // Async function that is called by fetchWeather function to fetch location coordinates
-const fetchCoords = async function() {
+const fetchCoords = async function(location) {
     // Set location to Hazlet, NJ by default
-    let location = 'Hazlet,%20NJ,%20US'
+    const loc = location;
     try {
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&APPID=${appId}`;
+        const url = `http://api.openweathermap.org/data/2.5/weather?q=${loc}&APPID=${appId}`;
         const response = await fetch(url, {mode: 'cors'})
         const responseJson = await response.json();
         const prelimWeatherData = {
@@ -35,7 +35,6 @@ const fetchCoords = async function() {
             city: responseJson.name,
             country: responseJson.sys.country
         };
-        console.log(prelimWeatherData);
         return prelimWeatherData
     } catch {
         console.log('error!');
@@ -83,4 +82,14 @@ const renderWeather = function(weather, prelimWeather) {
     humidity.innerText = `Humidity: ${weather.humidity}%`;
 };
 
-fetchWeather();
+// Search city from search bar
+const searchCity = function(event) {
+    event.preventDefault();
+    const keyword = document.getElementById('searchbox').value;
+    fetchWeather(keyword);
+};
+const searchForm = document.getElementById('search-container');
+searchForm.addEventListener('submit', searchCity)
+
+
+fetchWeather('Hazlet,%20NJ,%20US');
