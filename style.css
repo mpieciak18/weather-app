@@ -25,7 +25,6 @@ body > * {
     flex-direction: row;
     justify-content: end;
     align-items: center;
-    margin-bottom: 60px;
 }
 #searchbox {
     height: 40px;
@@ -43,6 +42,23 @@ body > * {
     margin-right: 240px;
     height: 18px;
     margin-top: 30px;
+}
+#error-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    align-items: center;
+}
+#error-message {
+    font-family: 'Hind Siliguri, regular';
+    margin: 5px 52px 0px 0px;
+    color: rgb(209, 0, 0);
+}
+.visible {
+    visibility: visible;
+}
+.hidden {
+    visibility: hidden;
 }
 #bottom-half {
     display: flex;

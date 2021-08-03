@@ -18,7 +18,7 @@ const fetchWeather = async function(keyword) {
         const todayWeather = new todayWeatherConst(todayJson.current);
         renderWeather(todayWeather, prelimWeatherData);
     } catch {
-        console.log('error!');
+        renderError('visible');
     };
 };
 // Async function that is called by fetchWeather function to fetch location coordinates
@@ -37,7 +37,7 @@ const fetchCoords = async function(location) {
         };
         return prelimWeatherData
     } catch {
-        console.log('error!');
+        renderError('visible');
     };
 }
 // Constructs today's weather forecast object with only necessary attributes
@@ -80,6 +80,8 @@ const renderWeather = function(weather, prelimWeather) {
     feelsLike.innerText = `Feels Like: ${Math.round(weather.feels_like)}°F`;
     wind.innerText = `Wind: ${Math.round(weather.wind_speed)} MPH`;
     humidity.innerText = `Humidity: ${weather.humidity}%`;
+
+    renderError('hidden');
 };
 
 // Search city from search bar
@@ -91,5 +93,17 @@ const searchCity = function(event) {
 const searchForm = document.getElementById('search-container');
 searchForm.addEventListener('submit', searchCity)
 
+// Display or hide error message
+const renderError = function(outcome = null) {
+    const errorMessage = document.getElementById('error-message');
+
+    if (outcome == 'visible') {
+        errorMessage.classList.remove('hidden');
+        errorMessage.classList.add('visible');      
+    } else {
+        errorMessage.classList.remove('visible');
+        errorMessage.classList.add('hidden')
+    };
+};
 
 fetchWeather('Hazlet,%20NJ,%20US');
