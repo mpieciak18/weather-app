@@ -72,9 +72,6 @@ body > * {
     background-color: rgba(255, 255, 255, 0.5);
     justify-self: center;
 }
-#bottom-right > * {
-    margin: 0px 0px 0px 50px;
-}
 #bottom-left {
     display: flex;
     flex-direction: row;
@@ -82,17 +79,9 @@ body > * {
     margin-bottom: 10px;
     font-family: 'Hind Siliguri, bold';
 }
-#temp {
-    font-size: 150px;
-    margin: 0px;
-}
 #temp-metric {
     font-size: 30px;
     margin-top: 50px;
-}
-#wind {
-    margin-top: 25px;
-    margin-bottom: 25px;
 }
 #summary {
     font-size: 24px;
@@ -108,4 +97,30 @@ body > * {
 }
 #lat {
     margin-right: 20px;
+}
+@media (min-width: 600px) {
+    #bottom-right > * {
+        margin: 0px 0px 0px 50px;
+    }
+    #wind {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+    #temp {
+        font-size: 150px;
+        margin: 0px;
+    }
+}
+@media (max-width: 600px) {
+    #bottom-right > * {
+        margin: 0px 0px 0px 20px;
+    }
+    #wind {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    #temp {
+        font-size: 120px;
+        margin: 0px;
+    }
 }
