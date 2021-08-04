@@ -46,10 +46,13 @@ body > * {
     flex-direction: row;
     justify-content: flex-end;
     align-items:center;
+    margin-top: -25px;
 }
 #error-message {
     font-family: 'Hind Siliguri, regular';
-    margin: 5px 52px 0px 0px;
+    /* margin: 0px 52px 0px 0px; */
+    margin: 0px;
+    padding-right: 50px;
     color: rgb(209, 0, 0);
 }
 .visible {
