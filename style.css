@@ -23,8 +23,9 @@ body > * {
 #search-container {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
+    padding: 30px 0px;
 }
 #searchbox {
     height: 40px;
@@ -34,14 +35,11 @@ body > * {
     border: 0px;
     text-indent: 40px;
     font-size: 16px;
-    margin: 30px 36px 0px 0px;
+    margin: 0px 36px 0px -30px;
     border-radius: 5px;
 }
 #search-icon {
-    position: absolute;
-    margin-right: 240px;
     height: 18px;
-    margin-top: 30px;
 }
 #error-container {
     display: flex;
