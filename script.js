@@ -26,7 +26,7 @@ const fetchCoords = async function(location) {
     // Set location to Hazlet, NJ by default
     const loc = location;
     try {
-        const url = `http://api.openweathermap.org/data/2.5/weather?q=${loc}&APPID=${appId}`;
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${loc}&APPID=${appId}`;
         const response = await fetch(url, {mode: 'cors'})
         const responseJson = await response.json();
         const prelimWeatherData = {
